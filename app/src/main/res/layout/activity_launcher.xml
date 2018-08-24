@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_gradient_animation_list"
+    android:id="@+id/launcher_container"
+    tools:context="com.sidekick.apps.habiter.LauncherActivity">
+
+        <TextView
+            android:id="@+id/launcher_text_view_one"
+            android:layout_width="307dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:fontFamily="cursive"
+            android:text="Habiter"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="65sp"
+            android:textColor="?android:attr/colorPressedHighlight"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/launcher_text_view_two"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="300dp"
+            android:background="@color/colorAccent"
+            android:gravity="end|center_horizontal"
+            android:padding="10dp"
+
+            android:text="Get Started"
+            android:textAlignment="center"
+            android:textColor="@color/colorAmber_900"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+
+
+</LinearLayout>
