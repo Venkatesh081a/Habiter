@@ -7,7 +7,6 @@
     android:background="@drawable/drawable_gradient_animation_list"
     android:id="@+id/launcher_container"
     tools:context="com.sidekick.apps.habiter.LauncherActivity">
-
         <TextView
             android:id="@+id/launcher_text_view_one"
             android:layout_width="307dp"
@@ -20,7 +19,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="65sp"
             android:textColor="?android:attr/colorPressedHighlight"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/launcher_text_view_two"
@@ -34,13 +33,52 @@
             android:background="@color/colorAccent"
             android:gravity="end|center_horizontal"
             android:padding="10dp"
-
             android:text="Get Started"
             android:textAlignment="center"
             android:textColor="@color/colorAmber_900"
             android:textSize="24sp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/user_name_text_view"
+            android:layout_width="307dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:fontFamily="cursive"
+            android:text="AWESOME NAME"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:attr/colorPressedHighlight"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/user_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="Name"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/user_name_submit_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="200dp"
+            android:background="@color/colorAccent"
+            android:gravity="end|center_horizontal"
+            android:padding="10dp"
+            android:text="Submit"
+            android:textAlignment="center"
+            android:textColor="@color/colorAmber_900"
+            android:textSize="24sp"
+            android:visibility="gone" />
 
 
 </LinearLayout>
+
