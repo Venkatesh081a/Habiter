@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.support.annotation.IntegerRes
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +20,10 @@ import de.hdodenhof.circleimageview.CircleImageView
 class ProfileFragment:Fragment() {
 
 
-    lateinit var dp: CircleImageView
-    lateinit var levelProgressBar: ProgressBar
-    lateinit var pointsProgressBar: ProgressBar
+    private lateinit var dp: CircleImageView
+    private lateinit var levelProgressBar: ProgressBar
+    private lateinit var pointsProgressBar: ProgressBar
+    private lateinit var userName:TextView
     private lateinit var streakTextView: TextView
 
 
@@ -34,18 +36,30 @@ class ProfileFragment:Fragment() {
 
     private fun initializeWidgets(view: View) {
         dp = view.findViewById(R.id.profile_dp)
-        val user: User = HabitsDatabase.getDatabase(context).habitsDao().user[0]
+        userName = view.findViewById(R.id.profile_name)
         levelProgressBar = view.findViewById(R.id.profile_progress_level)
         pointsProgressBar = view.findViewById(R.id.profile_progress_points)
         streakTextView = view.findViewById(R.id.streak_text_view_profile_fragment)
-        streakTextView.text = user.streak.toString()
-        val level: Int = user.lvl + 25
-        val points: Int = user.points + 30
-        levelProgressBar.progress = level
-        pointsProgressBar.progress = points
+        bindData()
+    }
+    private fun bindData() {
+        try {
+            Thread().run {
+                val user: User = HabitsDatabase.getDatabase(context.applicationContext).habitsDao().user[0]
+
+                streakTextView.text = user.streak.toString()
+                userName.text = user.userName
+                val level: Int = user.lvl + 25
+                val points: Int = user.points + 30
+                levelProgressBar.progress = level
+                pointsProgressBar.progress = points
+            }
+        } catch (exception: Exception) {
+            Log.e("DataBaseError", "UserNotFound")
+                       }
     }
     companion object {
-        public fun getInstance(): ProfileFragment {
+        fun getInstance(): ProfileFragment {
             return ProfileFragment()
         }
     }

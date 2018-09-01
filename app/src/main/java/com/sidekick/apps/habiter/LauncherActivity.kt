@@ -1,27 +1,24 @@
 package com.sidekick.apps.habiter
 
+
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.AnimationDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
-import android.support.v4.app.FragmentManager
-import android.transition.Fade
 import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.Gravity
-import android.view.Gravity.BOTTOM
-import android.view.Gravity.TOP
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_launcher.*
+import com.sidekick.apps.habiter.models.HabitsDatabase
+import com.sidekick.apps.habiter.models.User
+
 
 class LauncherActivity : AppCompatActivity() {
     private lateinit var layoutContainer: ViewGroup
@@ -51,6 +48,7 @@ class LauncherActivity : AppCompatActivity() {
         textViewOne = layoutContainer.findViewById(R.id.launcher_text_view_one)
         startButton = layoutContainer.findViewById(R.id.launcher_text_view_two)
         startButton.setOnClickListener(startButtonOnClickListener())
+        submitButton.setOnClickListener(submitButtonOnClickListener())
         animationDrawable = layoutContainer.background as AnimationDrawable
         animationDrawable.apply {
             setEnterFadeDuration(4000)
@@ -58,6 +56,19 @@ class LauncherActivity : AppCompatActivity() {
         }
         slideFromTop = Slide(Gravity.TOP).setDuration(700)
         slideFromBottom = Slide(Gravity.BOTTOM).setDuration(700)
+    }
+
+    private fun submitButtonOnClickListener(): View.OnClickListener? = View.OnClickListener{
+        val userName = nameEditText.text.toString()
+        val user = User(userName)
+        Thread().run{
+            HabitsDatabase.getDatabase(applicationContext).habitsDao().insertUser(user)
+        }
+        Log.d("user","userInserted")
+        val intent = Intent(applicationContext,DashBoardActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     private fun startButtonOnClickListener(): View.OnClickListener? = View.OnClickListener{
@@ -101,6 +112,11 @@ class LauncherActivity : AppCompatActivity() {
         {
             animationDrawable.stop()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
     }
 }
 

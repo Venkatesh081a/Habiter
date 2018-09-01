@@ -13,16 +13,16 @@ import java.util.List;
 @Dao
 public interface HabitsDao {
     @Insert
-    public void insertHabit(Habit habit);
+    void insertHabit(Habit habit);
     @Insert
-    public void insertUser(User user);
+    void insertUser(User user);
     @Query("SELECT * FROM USER")
-    public List<User> getUser();
+    List<User> getUser();
     @Query("SELECT * FROM HABIT WHERE ID=:id")
-    public Habit getOneHabit(int id);
+    Habit getOneHabit(int id);
     @Query("SELECT COUNT(id) FROM HABIT")
-    public int getHabitCount();
+    int getHabitCount();
     @Query("SELECT * FROM HABIT")
-    public List<Habit> getAllHabits();
+    List<Habit> getAllHabits();
 
 }
