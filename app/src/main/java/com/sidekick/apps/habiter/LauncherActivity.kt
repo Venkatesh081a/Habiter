@@ -58,17 +58,22 @@ class LauncherActivity : AppCompatActivity() {
         slideFromBottom = Slide(Gravity.BOTTOM).setDuration(700)
     }
 
-    private fun submitButtonOnClickListener(): View.OnClickListener? = View.OnClickListener{
-        val userName = nameEditText.text.toString()
-        val user = User(userName)
-        Thread().run{
-            HabitsDatabase.getDatabase(applicationContext).habitsDao().insertUser(user)
+    private fun submitButtonOnClickListener(): View.OnClickListener? = View.OnClickListener {
+        val userName = nameEditText.text.toString().trim()
+        if (userName.isNotBlank()) {
+            val user = User(userName)
+            Thread().run {
+                HabitsDatabase.getDatabase(applicationContext).habitsDao().insertUser(user)
+            }
+            Log.d("user", "userInserted")
+            val intent = Intent(applicationContext, DashBoardActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        } else
+        {
+            nameEditText.hint = "Name Required"
         }
-        Log.d("user","userInserted")
-        val intent = Intent(applicationContext,DashBoardActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
     }
 
     private fun startButtonOnClickListener(): View.OnClickListener? = View.OnClickListener{

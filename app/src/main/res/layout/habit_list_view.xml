@@ -1,34 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
-    android:layout_marginBottom="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="120dp"
+    android:layout_marginBottom="20dp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        app:cardBackgroundColor="@color/colorPrimaryDark"
-        app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_radius">
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="10dp">
 
-        <TextView
-            android:id="@+id/list_item_habit_name"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            android:textColor="@color/cardview_light_background"/>
+            <TextView
+                android:id="@+id/list_item_habit_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="53dp"
+                android:text="Habit Name"
+                android:textAlignment="center"
+                android:textColor="@color/colorAmber_A400"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/habit_health"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
-        <TextView
-            android:id="@+id/list_item_habit_streak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:layout_toRightOf="@id/list_item_habit_name"
-            />
+            <TextView
+
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginBottom="48dp"
+                android:layout_marginEnd="160dp"
+                android:layout_marginStart="15dp"
+                android:text="streak"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView13"
+                app:layout_constraintHorizontal_bias="0.216"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/list_item_habit_streak"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginStart="77dp"
+                android:text="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_done"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/habit_health"
+                android:layout_width="88dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Health"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/list_item_habit_name" />
+
+            <Button
+                android:id="@+id/button_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="136dp"
+                android:text="DONE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/list_item_habit_streak" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="52dp"
+                android:layout_height="28dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="16dp"
+                android:text="Needed"
+                android:textAlignment="textStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <TextView
+                android:id="@+id/points_text_view"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="77dp"
+                android:text="25"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_done"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="0dp"
+                android:layout_height="27dp"
+                android:layout_marginBottom="52dp"
+                android:layout_marginEnd="89dp"
+                android:text="count"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="36dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="48dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="35dp"
+                android:text="12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>

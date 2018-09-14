@@ -20,7 +20,7 @@ import com.sidekick.apps.habiter.models.Habit
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.habitName?.text =habitsList[position].name
         holder.habitStreak?.text = habitsList[position].streak.toString()
-        holder.itemView.setOnClickListener(View.OnClickListener {
+        holder.itemView.setOnClickListener({
             clickListener.onClick(holder.itemView,position)
         })
 

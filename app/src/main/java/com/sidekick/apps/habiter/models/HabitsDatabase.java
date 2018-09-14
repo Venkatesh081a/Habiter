@@ -8,7 +8,7 @@ import android.content.Context;
 /**
  * Created by HaRRy on 7/19/2018.
  */
-@Database(entities = {Habit.class,User.class},version = 2,exportSchema = false)
+@Database(entities = {Habit.class,User.class},version = 3,exportSchema = false)
 public abstract class HabitsDatabase extends RoomDatabase {
     private static final String DB_NAME = "HABITER";
     private static HabitsDatabase habitsDatabase;

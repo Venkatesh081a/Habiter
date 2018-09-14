@@ -12,6 +12,16 @@ import android.support.annotation.NonNull;
 public class User {
     @PrimaryKey @NonNull
     private String userName;
+
+    public int getRevives() {
+        return revives;
+    }
+
+    public void setRevives(int revives) {
+        this.revives = revives;
+    }
+
+    private int revives;
     private int lvl;
     private int points;
     private int streak;
@@ -20,6 +30,7 @@ public class User {
         this.points = 0;
         this.userName = userName;
         this.streak = 0;
+        this.revives = 2;
     }
 
     public int getStreak() {
