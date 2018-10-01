@@ -85,7 +85,7 @@ import com.sidekick.apps.habiter.models.User
     private fun setUpToolbar() {
         toolbar = findViewById(R.id.dashboard_toolbar)
         setSupportActionBar(toolbar)
-        window.statusBarColor = resources.getColor(R.color.accent_material_dark)
+        window.statusBarColor = resources.getColor(R.color.colorPrimary)
     }
 
     override fun onResume() {

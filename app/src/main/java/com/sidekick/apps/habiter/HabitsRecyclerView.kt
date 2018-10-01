@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.sidekick.apps.habiter.models.Habit
+import org.w3c.dom.Text
 
 /**
  * Created by HaRRy on 8/7/2018.
@@ -23,6 +25,9 @@ import com.sidekick.apps.habiter.models.Habit
         holder.itemView.setOnClickListener({
             clickListener.onClick(holder.itemView,position)
         })
+        //holder.dayCount = habitsList[position].dayCount
+        holder.health.text = habitsList[position].health.toString()
+        //holder.neededPoints = habitsList[position].needPoints
 
 
     }
@@ -43,6 +48,10 @@ import com.sidekick.apps.habiter.models.Habit
     {
         val habitName:TextView? = itemView.findViewById(R.id.list_item_habit_name)
         val habitStreak:TextView? = itemView.findViewById(R.id.list_item_habit_streak)
+        val dayCount:TextView? = itemView.findViewById(R.id.list_item_count)
+        val neededPoints:TextView? = itemView.findViewById(R.id.list_item_need_points)
+        val health:TextView = itemView.findViewById(R.id.list_item_health)
+        val doneButton:Button = itemView.findViewById(R.id.list_item_button_done)
 
 
     }

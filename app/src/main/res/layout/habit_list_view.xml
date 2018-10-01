@@ -29,7 +29,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAmber_A400"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/habit_health"
+                app:layout_constraintBottom_toTopOf="@+id/list_item_health"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/habit_health"
+                android:id="@+id/list_item_health"
                 android:layout_width="88dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="16dp"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/list_item_habit_name" />
 
             <Button
-                android:id="@+id/button_done"
+                android:id="@+id/list_item_button_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
@@ -95,7 +95,7 @@
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
-                android:id="@+id/points_text_view"
+                android:id="@+id/list_item_need_points"
                 android:layout_width="0dp"
                 android:layout_height="22dp"
                 android:layout_marginBottom="16dp"
@@ -118,7 +118,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView6" />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/list_item_count"
                 android:layout_width="36dp"
                 android:layout_height="32dp"
                 android:layout_marginBottom="48dp"
