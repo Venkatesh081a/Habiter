@@ -8,7 +8,6 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.sidekick.apps.habiter.models.Habit
 import com.sidekick.apps.habiter.models.HabitsDatabase
@@ -18,7 +17,7 @@ import com.sidekick.apps.habiter.models.HabitsDatabase
  */
 class AddHabitFragment:Fragment() {
 
-    lateinit var habitName:EditText
+    lateinit var habitNameEditText:EditText
     lateinit var addButton:Button
 
 
@@ -31,29 +30,25 @@ class AddHabitFragment:Fragment() {
 
 
     private fun initializeWidgets(view:View) {
-        habitName = view.findViewById<EditText>(R.id.fragment_addhabits_habit_name)
+        habitNameEditText = view.findViewById<EditText>(R.id.fragment_addhabits_habit_name)
         addButton = view.findViewById<Button>(R.id.fragment_addhabits_habit_add_button)
         addButton.setOnClickListener(addButtonOnclick())
     }
 
     private fun addButtonOnclick(): OnClickListener? {
         return OnClickListener {
-            val name:String = habitName.text.toString()
+            val name:String = habitNameEditText.text.toString()
             if(name.isNotEmpty() ) {
                 val habit: Habit = Habit()
-                habit.id = HabitsDatabase.getDatabase(context).habitsDao().habitCount + 1
-                one += 1
                 habit.name = name
-                habit.lvl = 0
-                habit.points = 0
                 HabitsDatabase.getDatabase(context).habitsDao().insertHabit(habit)
-                habitName.setText("")
+                habitNameEditText.setText("")
                 Toast.makeText(context, "habit Inserted", Toast.LENGTH_SHORT).show()
                 activity.onBackPressed()
             }
             else
             {
-                habitName.hint = " enter habit"
+                habitNameEditText.hint = " enter habit"
             }
 
         }
