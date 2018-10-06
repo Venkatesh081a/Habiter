@@ -14,10 +14,6 @@ import java.util.List;
 public interface HabitsDao {
     @Insert
     void insertHabit(Habit habit);
-    @Insert
-    void insertUser(User user);
-    @Query("SELECT * FROM USER")
-    List<User> getUser();
     @Query("SELECT * FROM HABIT WHERE ID=:id")
     Habit getOneHabit(int id);
     @Query("SELECT COUNT(id) FROM HABIT")
