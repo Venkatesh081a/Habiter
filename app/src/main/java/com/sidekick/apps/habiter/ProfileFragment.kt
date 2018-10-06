@@ -45,7 +45,7 @@ class ProfileFragment:Fragment() {
     private fun bindData() {
         try {
             Thread().run {
-                val user: User = HabitsDatabase.getDatabase(context.applicationContext).habitsDao().user[0]
+                val user: User = HabitsDatabase.getDatabase(context.applicationContext).userDao().user[0]
 
                 streakTextView.text = user.streak.toString()
                 userName.text = user.userName
