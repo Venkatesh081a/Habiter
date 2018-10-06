@@ -33,7 +33,7 @@ class ProfileOverviewFragment:Fragment()
 
     private fun initializeWidgets(view: View) {
         try {
-         Thread().run {val user:User = database.habitsDao().user[0]
+         Thread().run {val user:User = database.userDao().user[0]
 
         profileImage = view.findViewById(R.id.profile_image_view)
         profileImage.setOnClickListener(profileImageOnClick())
