@@ -27,9 +27,9 @@ import kotlin.concurrent.thread
         val habit = habitsList[position]
         holder.habitName?.text =habit.name
         holder.habitStreak?.text = habit.streak.toString()
-        holder.itemView.setOnClickListener({
+        holder.itemView.setOnClickListener {
             clickListener.onClick(holder.itemView,position)
-        })
+        }
         holder.dayCount?.text = habit.daysToComplete.toString()
         holder.health.text = habit.health.toString()
         //holder.neededPoints = habit.needPoints

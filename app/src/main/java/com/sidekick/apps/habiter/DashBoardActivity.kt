@@ -65,19 +65,7 @@ import com.sidekick.apps.habiter.models.User
     }
 
 
-    private fun oneTimeLaunchScreen()
 
-    {
-
-        val userList = HabitsDatabase.getDatabase(applicationContext).userDao().user
-
-        if(userList.size == 0 )   {
-            val intent = Intent(applicationContext,LauncherActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)}
-
-    }
 
     private fun setUpToolbar() {
         toolbar = findViewById(R.id.dashboard_toolbar)
@@ -95,7 +83,19 @@ import com.sidekick.apps.habiter.models.User
 
 
     }
+    private fun oneTimeLaunchScreen()
 
+    {
+
+        val userList = HabitsDatabase.getDatabase(applicationContext).userDao().user
+
+        if(userList.size == 0 )   {
+            val intent = Intent(applicationContext,LauncherActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)}
+
+    }
     companion object {
         val DASHBOARD_TAG = "DashBoardActivity"
     }
