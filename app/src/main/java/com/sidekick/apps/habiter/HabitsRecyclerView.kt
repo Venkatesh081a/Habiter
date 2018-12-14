@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,25 +13,50 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.sidekick.apps.habiter.models.Habit
+import com.sidekick.apps.habiter.models.HabitsDatabase
 import org.w3c.dom.Text
+import java.util.*
+import kotlin.concurrent.thread
 
 /**
  * Created by HaRRy on 8/7/2018.
  */
- class HabitsRecyclerViewAdapter(private val habitsList:List<Habit>,private val context:Context,private val clickListener:CustomClickListener)
+ class HabitsRecyclerViewAdapter(private val habitsList:List<Habit>,private val context:Context,private val clickListener:HabitClickListener)
     :RecyclerView.Adapter<HabitsRecyclerViewAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.habitName?.text =habitsList[position].name
-        holder.habitStreak?.text = habitsList[position].streak.toString()
+        val habit = habitsList[position]
+        holder.habitName?.text =habit.name
+        holder.habitStreak?.text = habit.streak.toString()
         holder.itemView.setOnClickListener({
             clickListener.onClick(holder.itemView,position)
         })
-        //holder.dayCount = habitsList[position].dayCount
-        holder.health.text = habitsList[position].health.toString()
-        //holder.neededPoints = habitsList[position].needPoints
-
+        holder.dayCount?.text = habit.daysToComplete.toString()
+        holder.health.text = habit.health.toString()
+        //holder.neededPoints = habit.needPoints
+       holder.doneButton.isEnabled = calculateEnabledButton(habit)
+        holder.doneButton.setOnClickListener(doneButtonOnClickListener(habit))
 
     }
+    private fun calculateEnabledButton(habit: Habit):Boolean
+    {
+        val difference:Int = Date().minutes - habit.lastDoneDate.minutes
+       if(difference > habit.frequency)
+       {
+           return true
+       }
+        return false
+    }
+
+    private fun doneButtonOnClickListener(habit:Habit) =View.OnClickListener {
+        Log.d("doneButton","is clicked")
+        Toast.makeText(context.applicationContext,habit.lastDoneDate.minutes.toString(),Toast.LENGTH_SHORT).show()
+        habit.habitDone()
+        thread {HabitsDatabase.getDatabase(context.applicationContext).habitsDao().updateHabit(habit)  }.run()
+
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int):ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.habit_list_view,parent,false)
         v.setOnClickListener( {

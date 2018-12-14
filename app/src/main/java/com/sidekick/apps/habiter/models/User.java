@@ -22,6 +22,7 @@ public class User {
     private int points;
     private int streak;
     private int totalTimesDone;
+    private int habitCount;
     @Embedded
     private Date lastDoneDate;
     public User( @NonNull String userName){
@@ -31,8 +32,9 @@ public class User {
         this.favHabit = "Not Available";
         this.streak = 0;
         this.revives = 2;
-        this.habitLimit = 2;
+        this.habitLimit = 5;
         this.totalTimesDone = 0;
+        this.habitCount = 0;
     }
 
     public int getStreak() {
@@ -94,5 +96,13 @@ public class User {
 
     public void setLastDoneDate(Date lastDoneDate) {
         this.lastDoneDate = lastDoneDate;
+    }
+
+    public int getHabitCount() {
+        return habitCount;
+    }
+
+    public void setHabitCount(int habitCount) {
+        this.habitCount = habitCount;
     }
 }

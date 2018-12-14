@@ -23,7 +23,7 @@ import java.text.FieldPosition
  * Created by HaRRy on 8/8/2018.
  */
 class HabitListViewFragment:Fragment(){
-    private class myListener(private val context:Context):CustomClickListener
+    private class myListener(private val context:Context):HabitClickListener
     {
         override fun onClick(p0: View?,position: Int) {
             Log.d("habit fragment","clicked the habit"+ position);

@@ -2,20 +2,16 @@ package com.sidekick.apps.habiter
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
-import android.preference.PreferenceManager
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import android.widget.Toast
 import com.sidekick.apps.habiter.models.HabitsDatabase
 import com.sidekick.apps.habiter.models.User
 
@@ -39,7 +35,7 @@ import com.sidekick.apps.habiter.models.User
         fm = supportFragmentManager
         setUpToolbar()
         initializeWidgets()
-        addHabitsListViewFragment()
+       // addHabitsListViewFragment()
         }
 
     private fun initializeWidgets() {
@@ -63,6 +59,7 @@ import com.sidekick.apps.habiter.models.User
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
         menuInflater.inflate(R.menu.main_option_menu,menu)
         return true
     }
@@ -72,7 +69,7 @@ import com.sidekick.apps.habiter.models.User
 
     {
 
-        val userList = HabitsDatabase.getDatabase(applicationContext).habitsDao().user
+        val userList = HabitsDatabase.getDatabase(applicationContext).userDao().user
 
         if(userList.size == 0 )   {
             val intent = Intent(applicationContext,LauncherActivity::class.java)
@@ -88,6 +85,10 @@ import com.sidekick.apps.habiter.models.User
         window.statusBarColor = resources.getColor(R.color.colorPrimary)
     }
 
+
+
+
+
     override fun onResume() {
         super.onResume()
        fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
@@ -101,3 +102,40 @@ import com.sidekick.apps.habiter.models.User
 
 
 }
+
+class UpdateRecords(val database: HabitsDatabase):AsyncTask<String,String,String>()
+{
+    override fun doInBackground(vararg p0: String):String{
+       val allHabits = database.habitsDao().allHabits
+        for (habit in allHabits)
+        {
+            if(habit.isNotDone)
+            {
+                habit.decreaseHealth()
+            }
+
+            database.habitsDao().updateHabit(habit)
+            //update the habit data here..
+
+        }
+    return "ok"
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

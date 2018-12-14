@@ -3,6 +3,7 @@ package com.sidekick.apps.habiter.models;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,16 @@ import java.util.List;
 public interface HabitsDao {
     @Insert
     void insertHabit(Habit habit);
+
+    @Update
+    void updateHabit(Habit habit);
+
     @Query("SELECT * FROM HABIT WHERE ID=:id")
     Habit getOneHabit(int id);
+
     @Query("SELECT COUNT(id) FROM HABIT")
     int getHabitCount();
+
     @Query("SELECT * FROM HABIT")
     List<Habit> getAllHabits();
 

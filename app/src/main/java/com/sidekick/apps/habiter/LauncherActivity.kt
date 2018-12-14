@@ -63,7 +63,7 @@ class LauncherActivity : AppCompatActivity() {
         if (userName.isNotBlank()) {
             val user = User(userName)
             Thread().run {
-                HabitsDatabase.getDatabase(applicationContext).habitsDao().insertUser(user)
+                HabitsDatabase.getDatabase(applicationContext).userDao().insertUser(user)
             }
             Log.d("user", "userInserted")
             val intent = Intent(applicationContext, DashBoardActivity::class.java)

@@ -6,19 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import com.sidekick.apps.habiter.models.Habit
 import com.sidekick.apps.habiter.models.HabitsDatabase
+import com.sidekick.apps.habiter.models.User
+import java.util.*
 
 /**
  * Created by HaRRy on 7/19/2018.
  */
 class AddHabitFragment:Fragment() {
 
-    lateinit var habitNameEditText:EditText
-    lateinit var addButton:Button
+    private lateinit var habitNameEditText:EditText
+    private lateinit var addButton:Button
+    private lateinit var frequencySeekBar:SeekBar
+    private lateinit var dayGoalSeekBar:SeekBar
+    private lateinit var dayGoalTextView:TextView
+    private lateinit var frequencyTextView: TextView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,21 +34,67 @@ class AddHabitFragment:Fragment() {
 
 
     private fun initializeWidgets(view:View) {
-        habitNameEditText = view.findViewById<EditText>(R.id.fragment_addhabits_habit_name)
-        addButton = view.findViewById<Button>(R.id.fragment_addhabits_habit_add_button)
+        habitNameEditText = view.findViewById(R.id.fragment_addhabits_habit_name)
+        dayGoalTextView = view.findViewById(R.id.day_goal_textview)
+        frequencyTextView = view.findViewById(R.id.frequency_text_view)
+        addButton = view.findViewById(R.id.fragment_addhabits_habit_add_button)
         addButton.setOnClickListener(addButtonOnclick())
+        frequencySeekBar = view.findViewById(R.id.add_fragment_frequency)
+        frequencySeekBar.setOnSeekBarChangeListener(frequencySeekBarChangeListener())
+        dayGoalSeekBar = view.findViewById(R.id.add_fragment_day_goal)
+        dayGoalSeekBar.setOnSeekBarChangeListener(dayGoalSeekBarChangeListener())
     }
+    private fun frequencySeekBarChangeListener() = object :SeekBar.OnSeekBarChangeListener
+    {
+        override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+             var message = String()
+            if(p1>1) {
+                message= "Repeat in $p1 days"
+            }
+            else
+            {
+                message = "Repeat in $p1 day"
+            }
+
+            frequencyTextView.text = message
+
+        }
+
+        override fun onStartTrackingTouch(p0: SeekBar?) {
+
+        }
+
+        override fun onStopTrackingTouch(p0: SeekBar?) {
+
+        }
+    }
+    private fun dayGoalSeekBarChangeListener() = object :SeekBar.OnSeekBarChangeListener
+    {
+        override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+            val message:String = "$p1 times"
+            dayGoalTextView.text = message
+        }
+
+        override fun onStartTrackingTouch(p0: SeekBar?) {
+
+        }
+
+        override fun onStopTrackingTouch(p0: SeekBar?) {
+
+        }
+    }
+
 
     private fun addButtonOnclick(): OnClickListener? {
         return OnClickListener {
             val name:String = habitNameEditText.text.toString()
             if(name.isNotEmpty() ) {
-                val habit: Habit = Habit()
-                habit.name = name
-                HabitsDatabase.getDatabase(context).habitsDao().insertHabit(habit)
+                 val habit:Habit = setUpHabitData(name)
+                 insertHabit(habit)
+
                 habitNameEditText.setText("")
                 Toast.makeText(context, "habit Inserted", Toast.LENGTH_SHORT).show()
-                activity.onBackPressed()
+
             }
             else
             {
@@ -53,8 +103,36 @@ class AddHabitFragment:Fragment() {
 
         }
     }
+    private fun setUpHabitData(name:String): Habit {
+        val habit = Habit()
+        habit.name = name
+        habit.daysToComplete = dayGoalSeekBar.progress
+        habit.frequency = frequencySeekBar.progress
+        habit.startDate = Date()
+        habit.lastDoneDate = Date()
+        return habit
+    }
+
+    private fun insertHabit(habit :Habit) {
+        Thread().run()
+                {
+                    val appContext = context.applicationContext
+                    val user: User = HabitsDatabase.getDatabase(appContext).userDao().user[0]
+                    habit.id = user.habitCount
+                    if(user.habitLimit !=0)
+                    {
+                    HabitsDatabase.getDatabase(appContext).habitsDao().insertHabit(habit)
+                    user.habitCount += 1
+                    user.habitLimit -= 1
+                    HabitsDatabase.getDatabase(appContext).userDao().updateUser(user)
+                    activity.onBackPressed()
+                }
+                }
+    }
+
+
+
     companion object {
-        var one:Int = 2
         fun getInstance():AddHabitFragment
         {
             return AddHabitFragment()

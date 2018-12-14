@@ -26,7 +26,7 @@
         android:layout_marginLeft="4dp"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteY="201dp" />
-
+jm
     <ProgressBar
 
         android:id="@+id/progress_bar_points_view"
