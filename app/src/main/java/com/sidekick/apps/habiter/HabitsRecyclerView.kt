@@ -1,20 +1,19 @@
 package com.sidekick.apps.habiter
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.sidekick.apps.habiter.models.Habit
 import com.sidekick.apps.habiter.models.HabitsDatabase
-import org.w3c.dom.Text
+import java.time.YearMonth
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -37,9 +36,24 @@ import kotlin.concurrent.thread
         holder.doneButton.setOnClickListener(doneButtonOnClickListener(habit))
 
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun calculateEnabledButton(habit: Habit):Boolean
-    {
-        val difference:Int = Date().minutes - habit.lastDoneDate.minutes
+    {   val difference:Int
+        val yearMonth:YearMonth = YearMonth.of(habit.lastDoneDate.year,habit.lastDoneDate.month)
+
+        val day:Int = Date().day
+        val habitDays = habit.lastDoneDate.day
+        val month = Date().month
+        val habitMonth = habit.lastDoneDate.month
+        val totalRemainingDays = yearMonth.lengthOfMonth() -habitDays
+        difference = when {
+            (month == habitMonth) -> day - habitDays
+
+            else -> totalRemainingDays + habitDays
+        }
+
+
+//        val difference:Int = Date().minutes - habit.lastDoneDate.minutes
        if(difference > habit.frequency)
        {
            return true
@@ -59,11 +73,10 @@ import kotlin.concurrent.thread
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int):ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.habit_list_view,parent,false)
-        v.setOnClickListener( {
+        v.setOnClickListener {
             Toast.makeText(context,"item clicked",Toast.LENGTH_SHORT).show()
-        })
-        var viewHolder = ViewHolder(v)
-        return viewHolder
+        }
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
