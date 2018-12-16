@@ -36,20 +36,20 @@ import kotlin.concurrent.thread
         holder.doneButton.setOnClickListener(doneButtonOnClickListener(habit))
 
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+
     private fun calculateEnabledButton(habit: Habit):Boolean
     {   val difference:Int
-        val yearMonth:YearMonth = YearMonth.of(habit.lastDoneDate.year,habit.lastDoneDate.month)
+       // val yearMonth:YearMonth = YearMonth.of(habit.lastDoneDate.year,habit.lastDoneDate.month)
 
         val day:Int = Date().day
         val habitDays = habit.lastDoneDate.day
         val month = Date().month
         val habitMonth = habit.lastDoneDate.month
-        val totalRemainingDays = yearMonth.lengthOfMonth() -habitDays
+        //val totalRemainingDays = yearMonth.lengthOfMonth() -habitDays
         difference = when {
             (month == habitMonth) -> day - habitDays
 
-            else -> totalRemainingDays + habitDays
+            else -> 5 + habitDays
         }
 
 

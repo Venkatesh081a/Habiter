@@ -28,7 +28,7 @@ class HabitListViewFragment:Fragment(){
         override fun onClick(p0: View?,position: Int) {
             Log.d("habit fragment","clicked the habit"+ position);
             val intent = Intent(context,ViewHabitActivity::class.java)
-            intent.putExtra(HABIT_ID,position+1)
+            intent.putExtra(HABIT_ID,position)
             startActivity(context,intent,null)
         }
     }
