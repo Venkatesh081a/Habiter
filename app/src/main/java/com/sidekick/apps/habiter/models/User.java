@@ -3,6 +3,7 @@ package com.sidekick.apps.habiter.models;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -18,6 +19,7 @@ public class User {
     private String favHabit;
     private int habitLimit;
     private int revives;
+    private int revivesRemaining;
     private int lvl;
     private int points;
     private int streak;
@@ -49,6 +51,13 @@ public class User {
         this.revives = revives;
     }
 
+    public int getRevivesRemaining() {
+        return revivesRemaining;
+    }
+
+    public void setRevivesRemaining(int revivesRemaining) {
+        this.revivesRemaining = revivesRemaining;
+    }
 
     //implements the Habit model
      //  @ForeignKey(Habit)
@@ -104,5 +113,15 @@ public class User {
 
     public void setHabitCount(int habitCount) {
         this.habitCount = habitCount;
+    }
+
+    @Ignore
+    public int habitDone(int points)
+    {
+        this.points += points;
+        this.streak += 1;
+        this.totalTimesDone += 1;
+
+        return 0;
     }
 }

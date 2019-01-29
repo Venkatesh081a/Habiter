@@ -20,7 +20,6 @@ class AddHabitFragment:Fragment() {
     private lateinit var habitNameEditText:EditText
     private lateinit var addButton:Button
     private lateinit var frequencySeekBar:SeekBar
-    private lateinit var dayGoalSeekBar:SeekBar
     private lateinit var dayGoalTextView:TextView
     private lateinit var frequencyTextView: TextView
 
@@ -35,14 +34,13 @@ class AddHabitFragment:Fragment() {
 
     private fun initializeWidgets(view:View) {
         habitNameEditText = view.findViewById(R.id.fragment_addhabits_habit_name)
-        dayGoalTextView = view.findViewById(R.id.day_goal_textview)
+       // dayGoalTextView = view.findViewById(R.id.day_goal_textview)
         frequencyTextView = view.findViewById(R.id.frequency_text_view)
         addButton = view.findViewById(R.id.fragment_addhabits_habit_add_button)
         addButton.setOnClickListener(addButtonOnclick())
         frequencySeekBar = view.findViewById(R.id.add_fragment_frequency)
         frequencySeekBar.setOnSeekBarChangeListener(frequencySeekBarChangeListener())
-        dayGoalSeekBar = view.findViewById(R.id.add_fragment_day_goal)
-        dayGoalSeekBar.setOnSeekBarChangeListener(dayGoalSeekBarChangeListener())
+
     }
     private fun frequencySeekBarChangeListener() = object :SeekBar.OnSeekBarChangeListener
     {
@@ -68,21 +66,7 @@ class AddHabitFragment:Fragment() {
 
         }
     }
-    private fun dayGoalSeekBarChangeListener() = object :SeekBar.OnSeekBarChangeListener
-    {
-        override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-            val message:String = "$p1 times"
-            dayGoalTextView.text = message
-        }
 
-        override fun onStartTrackingTouch(p0: SeekBar?) {
-
-        }
-
-        override fun onStopTrackingTouch(p0: SeekBar?) {
-
-        }
-    }
 
 
     private fun addButtonOnclick(): OnClickListener? {
@@ -106,10 +90,9 @@ class AddHabitFragment:Fragment() {
     private fun setUpHabitData(name:String): Habit {
         val habit = Habit()
         habit.name = name
-        habit.daysToComplete = dayGoalSeekBar.progress
         habit.frequency = frequencySeekBar.progress
-        habit.startDate = Date()
-        habit.lastDoneDate = Date()
+        habit.startDate = Date().time
+        habit.lastDoneDate = Date().time
         return habit
     }
 
@@ -121,6 +104,7 @@ class AddHabitFragment:Fragment() {
                     habit.id = user.habitCount
                     if(user.habitLimit !=0)
                     {
+
                     HabitsDatabase.getDatabase(appContext).habitsDao().insertHabit(habit)
                     user.habitCount += 1
                     user.habitLimit -= 1

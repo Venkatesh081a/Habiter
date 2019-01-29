@@ -6,6 +6,8 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.text.style.TtsSpan;
 
+import com.sidekick.apps.habiter.Util;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,24 +25,32 @@ public class Habit {
     private int health;
     private int daysToComplete;
     private int totalTimesDone;
-    @Embedded
-    private Date startDate;
-    @Embedded
-    private Date lastDoneDate;
+
+
+
+    private int timesDone;
+    private Long startDate;
+    private Long lastDoneDate;
     private int frequency;
     @Ignore
     private int[] dayGoals = {1,2,2,3,3,3,4,5,6,5,6,7,7,7,8,8,8,9,10,14,15};
 
     public Habit()
     {
-        startDate = new Date();
+
         lvl = 1;
         streak = 0;
         health = 10;
-        lastDoneDate = new Date();
+        timesDone = 0;
 
     }
+    public int getTimesDone() {
+        return timesDone;
+    }
 
+    public void setTimesDone(int timesDone) {
+        this.timesDone = timesDone;
+    }
     public int getStreak() {
         return streak;
     }
@@ -89,19 +99,19 @@ public class Habit {
         this.health = health;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Long getStartDate() {
+        return this.startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Long startDate) {
         this.startDate = startDate;
     }
 
-    public Date getLastDoneDate() {
-        return lastDoneDate;
+    public Long getLastDoneDate() {
+        return this.lastDoneDate;
     }
 
-    public void setLastDoneDate(Date lastDoneDate) {
+    public void setLastDoneDate(Long lastDoneDate) {
         this.lastDoneDate = lastDoneDate;
     }
 
@@ -128,14 +138,15 @@ public class Habit {
     public void setTotalTimesDone(int totalTimesDone) {
         this.totalTimesDone = totalTimesDone;
     }
-
+    @Ignore
     public int habitDone()
     {
 
         this.daysToComplete -= 1;
         this.streak +=1;
         this.totalTimesDone +=1;
-        this.lastDoneDate = new Date();
+        this.timesDone +=1;
+        this.lastDoneDate = new Date().getTime();
         return rewardCode();
     }
     public int rewardCode()
@@ -143,12 +154,54 @@ public class Habit {
         return 0;
     }
 
+    @Ignore
+    public int getDifference()
+    {
+        int day = new Date().getDay();
+        int habitDays = new Date(this.lastDoneDate).getDay();
+        int month = new Date().getMonth();
+        int habitMonth = new Date(this.lastDoneDate).getMonth();
+        int habitYear = new Date(this.lastDoneDate).getYear();
+        int totalDays = Util.Companion.getDaysInMonth(habitMonth,habitYear);
+        int totalRemainingDays = totalDays - day;
+        int difference;
+        if(month == habitMonth)
+        {
+            difference = day - habitDays;
+        }
+        else
+        {
+            difference = totalRemainingDays + habitDays;
+        }
+        return difference;
+    }
+    @Ignore
+    public boolean enabledButton()
+    {
+       int difference = getDifference();
+        if(totalTimesDone == 0)
+        {
+            return true;
+        }
+       else if(difference >= this.frequency)
+       {
 
-
+           return true;
+       }
+       else
+       {
+           return false;
+       }
+    }
     @Ignore
     public boolean isNotDone()
     {
-       return false;
+       int difference =  getDifference();
+       if(difference > (this.frequency +1))
+        {
+            return true;
+        }
+        return false;
     }
     @Ignore
     public void decreaseHealth() {
@@ -160,5 +213,13 @@ public class Habit {
         {
             this.health = 0;
         }
+    }
+    @Ignore
+    public void levelUp() {
+        this.lvl += 1;
+        this.daysToComplete = dayGoals[lvl];
+        this.streak += 1;
+        this.timesDone = 0;
+
     }
 }

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.sidekick.apps.habiter.models.HabitsDatabase
+import java.util.*
 
 /**
  * Created by HaRRy on 7/25/2018.
@@ -64,9 +65,9 @@ class ViewHabitFragment:Fragment()
             streak.text = habit.streak.toString()
             daysToComplete.text = habit.daysToComplete.toString()
             totalTimesDone.text = habit.totalTimesDone.toString()
-            frequency.text = habit.frequency.toString()
-            lastDone.text = habit.lastDoneDate.toString()
-            startDate.text = habit.startDate.toString()
+            frequency.text = (habit.frequency).toString()
+            lastDone.text = Date(habit.lastDoneDate).toString()
+            startDate.text = Date(habit.startDate).toString()
             health.text = habit.health.toString()
 
 

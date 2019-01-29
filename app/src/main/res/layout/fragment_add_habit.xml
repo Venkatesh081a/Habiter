@@ -112,31 +112,6 @@
         app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name"
         app:layout_constraintVertical_bias="1.0" />
 
-    <SeekBar
-        android:id="@+id/add_fragment_day_goal"
-        style="@android:style/Widget.DeviceDefault.Light.SeekBar"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:max="20"
-        android:progress="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="@dimen/simple_text_view_width"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Day Goal"
-        app:layout_constraintBottom_toTopOf="@+id/add_fragment_day_goal"
-        app:layout_constraintStart_toStartOf="@+id/add_fragment_day_goal"
-        app:layout_constraintTop_toBottomOf="@+id/add_fragment_frequency" />
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="320dp"
@@ -161,12 +136,4 @@
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name" />
 
-    <TextView
-        android:id="@+id/day_goal_textview"
-        android:layout_width="@dimen/simple_text_view_width"
-        android:layout_height="25dp"
-        android:layout_marginStart="32dp"
-        android:text="3 Times"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
-        app:layout_constraintStart_toEndOf="@+id/textView12" />
 </android.support.constraint.ConstraintLayout>

@@ -13,7 +13,9 @@ import android.view.Menu
 import android.view.View
 import android.widget.RelativeLayout
 import com.sidekick.apps.habiter.models.HabitsDatabase
+import com.sidekick.apps.habiter.models.UnsuccessfulHabit
 import com.sidekick.apps.habiter.models.User
+import kotlin.concurrent.thread
 
 /**
  * Created by HaRRy on 7/7/2018.
@@ -28,6 +30,8 @@ import com.sidekick.apps.habiter.models.User
     override fun onStart() {
         super.onStart()
         oneTimeLaunchScreen()
+        val updateRecords = UpdateRecords(HabitsDatabase.getDatabase(applicationContext))
+        updateRecords.execute(DashBoardActivity.DASHBOARD_TAG)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,13 +101,13 @@ import com.sidekick.apps.habiter.models.User
 
     }
     companion object {
-        val DASHBOARD_TAG = "DashBoardActivity"
+        const val  DASHBOARD_TAG = "DashBoardActivity"
     }
 
 
 }
 
-class UpdateRecords(val database: HabitsDatabase):AsyncTask<String,String,String>()
+class UpdateRecords(private val database: HabitsDatabase):AsyncTask<String,String,String>()
 {
     override fun doInBackground(vararg p0: String):String{
        val allHabits = database.habitsDao().allHabits
@@ -111,13 +115,21 @@ class UpdateRecords(val database: HabitsDatabase):AsyncTask<String,String,String
         {
             if(habit.isNotDone)
             {
-                habit.decreaseHealth()
+                if(habit.health != 0)
+                {
+                    habit.decreaseHealth()
+                    habit.streak = 0
+                }
+                else
+                {
+                    database.unsuccessfulHabitsDao().insertUnsuccessfulHabit(habit as UnsuccessfulHabit)
+                    database.habitsDao().deleteHabit(habit)
+                }
             }
 
-            database.habitsDao().updateHabit(habit)
-            //update the habit data here..
-
         }
+
+         database.habitsDao().updateAllHabits(allHabits)
     return "ok"
     }
 
