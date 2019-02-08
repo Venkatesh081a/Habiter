@@ -15,6 +15,7 @@ import android.widget.RelativeLayout
 import com.sidekick.apps.habiter.models.HabitsDatabase
 import com.sidekick.apps.habiter.models.UnsuccessfulHabit
 import com.sidekick.apps.habiter.models.User
+import java.util.*
 import kotlin.concurrent.thread
 
 /**
@@ -31,7 +32,15 @@ import kotlin.concurrent.thread
         super.onStart()
         oneTimeLaunchScreen()
         val updateRecords = UpdateRecords(HabitsDatabase.getDatabase(applicationContext))
-        updateRecords.execute(DashBoardActivity.DASHBOARD_TAG)
+        //execute once a day
+        val isRefreshed = HabitsDatabase.getDatabase(applicationContext).userDao().user[0].isRefreshed
+        if (!isRefreshed) {
+            updateRecords.execute(DashBoardActivity.DASHBOARD_TAG)
+        }
+
+
+            HabitsDatabase.getDatabase(applicationContext).userDao().updateRefreshedDate(Date().time)
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,11 +129,7 @@ class UpdateRecords(private val database: HabitsDatabase):AsyncTask<String,Strin
                     habit.decreaseHealth()
                     habit.streak = 0
                 }
-                else
-                {
-                    database.unsuccessfulHabitsDao().insertUnsuccessfulHabit(habit as UnsuccessfulHabit)
-                    database.habitsDao().deleteHabit(habit)
-                }
+
             }
 
         }

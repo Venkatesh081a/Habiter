@@ -46,13 +46,13 @@ class AddHabitFragment:Fragment() {
     {
         override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
              var message = String()
-            if(p1>1) {
-                message= "Repeat in $p1 days"
-            }
-            else
+             val days = p1 +1
+            message = when(p1>1)
             {
-                message = "Repeat in $p1 day"
+                true -> "Repeat in $days days"
+                false -> "Repeat in $days day"
             }
+
 
             frequencyTextView.text = message
 
@@ -90,7 +90,7 @@ class AddHabitFragment:Fragment() {
     private fun setUpHabitData(name:String): Habit {
         val habit = Habit()
         habit.name = name
-        habit.frequency = frequencySeekBar.progress
+        habit.frequency = frequencySeekBar.progress+1
         habit.startDate = Date().time
         habit.lastDoneDate = Date().time
         return habit

@@ -7,6 +7,8 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.sidekick.apps.habiter.Util;
+
 import java.util.Date;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Date;
  */
 @Entity
 public class User {
+    private int userId;
     @PrimaryKey @NonNull
     private String userName;
     private String favHabit;
@@ -27,7 +30,10 @@ public class User {
     private int habitCount;
     @Embedded
     private Date lastDoneDate;
+    private long refreshedDate;
+
     public User( @NonNull String userName){
+        this.userId = 1;
         this.lvl = 1;
         this.points = 0;
         this.userName = userName;
@@ -37,6 +43,8 @@ public class User {
         this.habitLimit = 5;
         this.totalTimesDone = 0;
         this.habitCount = 0;
+        this.refreshedDate = new Date().getDate();
+
     }
 
     public int getStreak() {
@@ -62,6 +70,15 @@ public class User {
     //implements the Habit model
      //  @ForeignKey(Habit)
     //private Habit[] habits;
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     @NonNull
     public String getUserName() {
@@ -113,6 +130,25 @@ public class User {
 
     public void setHabitCount(int habitCount) {
         this.habitCount = habitCount;
+    }
+
+    public long getRefreshedDate() {
+        return refreshedDate;
+    }
+
+    public void setRefreshedDate(long refreshedDate) {
+        this.refreshedDate = refreshedDate;
+    }
+
+    public Boolean isRefreshed()
+    {
+        long day = new Date().getDay();
+
+        if(day!=this.refreshedDate)
+        {
+            return true;
+        }
+        return false;
     }
 
     @Ignore

@@ -18,4 +18,6 @@ public interface UserDao {
     List<User> getUser();
     @Update
     void updateUser(User user);
+    @Query("UPDATE USER SET refreshedDate=:date WHERE userId = 1")
+    void updateRefreshedDate(long date);
 }

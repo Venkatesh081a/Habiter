@@ -85,6 +85,7 @@ import kotlin.concurrent.thread
             user.habitDone(100)
             habitDatabase.habitsDao().updateHabit(habit)
             habitDatabase.userDao().updateUser(user)}.run()
+        notifyDataSetChanged()
 
     }
     private fun nextLevelOnClickListener(habit: Habit) = View.OnClickListener {
@@ -96,7 +97,7 @@ import kotlin.concurrent.thread
             habit.levelUp()
             habitsDatabase.habitsDao().updateHabit(habit)
         }
-
+        notifyDataSetChanged()
     }
 
 
