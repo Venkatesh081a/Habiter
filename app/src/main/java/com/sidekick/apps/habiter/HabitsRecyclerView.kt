@@ -28,7 +28,7 @@ import kotlin.concurrent.thread
         val habitStreak:TextView? = itemView.findViewById(R.id.list_item_habit_streak)
         val dayCount:TextView? = itemView.findViewById(R.id.list_item_count)
         val neededPoints:TextView? = itemView.findViewById(R.id.list_item_need_points)
-        val health:TextView = itemView.findViewById(R.id.list_item_health)
+       // val health:TextView = itemView.findViewById(R.id.list_item_health)
         val doneButton:Button = itemView.findViewById(R.id.list_item_button_done)
 
 
@@ -55,7 +55,7 @@ import kotlin.concurrent.thread
             clickListener.onClick(holder.itemView,habit.id)
         }
         holder.dayCount?.text = habit.daysToComplete.toString()
-        holder.health.text = habit.health.toString()
+       // holder.health.text = habit.health.toString()
         setUpDoneButton(holder,habit)
 
 
