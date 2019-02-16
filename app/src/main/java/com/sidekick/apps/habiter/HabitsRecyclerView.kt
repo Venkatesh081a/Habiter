@@ -1,5 +1,6 @@
 package com.sidekick.apps.habiter
 
+import android.app.Activity
 import android.content.Context
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +14,7 @@ import android.widget.Toast
 import com.sidekick.apps.habiter.models.Habit
 import com.sidekick.apps.habiter.models.HabitsDatabase
 import com.sidekick.apps.habiter.models.User
+import me.itangqi.waveloadingview.WaveLoadingView
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -30,6 +32,8 @@ import kotlin.concurrent.thread
         val neededPoints:TextView? = itemView.findViewById(R.id.list_item_need_points)
        // val health:TextView = itemView.findViewById(R.id.list_item_health)
         val doneButton:Button = itemView.findViewById(R.id.list_item_button_done)
+        val healthWaveLoadingView:WaveLoadingView = itemView.findViewById(R.id.list_item_health)
+        val progressWaveLoadingView:WaveLoadingView = itemView.findViewById(R.id.list_item_progress)
 
 
     }
@@ -55,6 +59,13 @@ import kotlin.concurrent.thread
             clickListener.onClick(holder.itemView,habit.id)
         }
         holder.dayCount?.text = habit.daysToComplete.toString()
+        holder.healthWaveLoadingView.progressValue = habit.health*3
+        holder.healthWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.bright_foreground_material_light)
+
+        holder.progressWaveLoadingView.progressValue = 58
+        holder.progressWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.colorGreen_A400)
+
+
        // holder.health.text = habit.health.toString()
         setUpDoneButton(holder,habit)
 
@@ -90,13 +101,14 @@ import kotlin.concurrent.thread
     }
     private fun nextLevelOnClickListener(habit: Habit) = View.OnClickListener {
         Log.d("nextLevelOnClickLister","is clicked")
-        //habit.levelUp()
-        HabitRenewFragment.getInstance(habit).show(fm,"tag")
-        thread {
+        habit.levelUp()
+        val habitRenewFragment = HabitRenewFragment.getInstance(habit).show(fm,"tag")
+       /*thread {
             val habitsDatabase = HabitsDatabase.getDatabase(context.applicationContext)
             habit.levelUp()
             habitsDatabase.habitsDao().updateHabit(habit)
-        }
+        }*/
+
         notifyDataSetChanged()
     }
 

@@ -69,7 +69,7 @@ class ViewHabitFragment:Fragment()
             lastDone.text = Date(habit.lastDoneDate).toString()
             startDate.text = Date(habit.startDate).toString()
             health.text = habit.health.toString()
-
+            backButton.setOnClickListener(backButtonOnClickListener())
 
         }
         catch (exception:Exception)
@@ -77,6 +77,9 @@ class ViewHabitFragment:Fragment()
 
 
         }
+    }
+    private fun backButtonOnClickListener():View.OnClickListener  = View.OnClickListener {
+        activity.onBackPressed()
     }
     companion object {
         val VIEW_HABIT_FRAGMENT_TAG = "ViewHabitFragment"

@@ -21,7 +21,7 @@ import kotlin.concurrent.thread
 /**
  * Created by HaRRy on 7/7/2018.
  */
- class DashBoardActivity:AppCompatActivity()
+ class DashBoardActivity:AppCompatActivity(),RefreshData
 {
     private lateinit var toolbar:Toolbar
     private lateinit var fm:FragmentManager
@@ -109,6 +109,12 @@ import kotlin.concurrent.thread
             startActivity(intent)}
 
     }
+
+    override fun refreshData() {
+
+        fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
+    }
+
     companion object {
         const val  DASHBOARD_TAG = "DashBoardActivity"
     }

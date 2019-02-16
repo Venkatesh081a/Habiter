@@ -37,6 +37,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
+        android:textColor="@color/cardview_dark_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -194,10 +195,11 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="Started on "
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        tools:layout_editor_absoluteX="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/view_habit_start_date"
@@ -213,19 +215,25 @@
         android:id="@+id/view_habit_health"
         android:layout_width="73dp"
         android:layout_height="25dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:text="health"
-        app:layout_constraintTop_toBottomOf="@+id/view_habit_start_date"
-        tools:layout_editor_absoluteX="145dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_habit_start_date" />
 
     <Button
         android:id="@+id/view_habit_button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorGreen_A400"
         android:text="back "
-        app:layout_constraintTop_toBottomOf="@+id/view_habit_health"
-        tools:layout_editor_absoluteX="140dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_habit_health" />
 
 </android.support.constraint.ConstraintLayout>
