@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashBoardActivity">
+    tools:context=".DashBoardActivity"
+    android:background="@drawable/gradient_3">
 
     <TextView
         android:id="@+id/textView"
@@ -56,7 +57,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/gradient_7"/>
 
     <SeekBar
         android:id="@+id/add_fragment_frequency"
@@ -82,6 +84,7 @@
         android:layout_marginTop="160dp"
         android:text="Remaining"
         android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/remaing_habits_text_view"
         app:layout_constraintEnd_toStartOf="@+id/remaing_habits_text_view"
         app:layout_constraintHorizontal_bias="0.057"
@@ -96,6 +99,7 @@
         android:layout_marginBottom="32dp"
         android:text="5"
         android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -134,5 +138,27 @@
         app:layout_constraintBottom_toTopOf="@+id/add_fragment_frequency"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="@dimen/profile_fragment_text_view_width"
+        android:layout_height="@dimen/profile_fragment_text_view_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Reward"
+        android:textSize="@dimen/profile_fragment_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_fragment_frequency" />
+
+    <EditText
+        android:id="@+id/reward"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </android.support.constraint.ConstraintLayout>

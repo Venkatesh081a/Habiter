@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#8bc34a</color>
+    <color name="colorPrimary">#ff5f6d</color>
     <color name="colorPrimaryDark">#81c784</color>
     <color name="colorAccent">#4e342e</color>
+    <color name="header">#001030</color>
+    <color name="mainBackground">#101840</color>
+    <color name="colorPink">#E82078</color>
+    <color name="colorpink_2">#C83078</color>
+    <color name="colorpink_3">#A84080</color>
+    <color name="colorGrey_1">#98A0A8</color>
+    <color name="colorGrey_2">#708090</color>
+    <color name="textPrimary">#E0E0F0</color>
+    <color name="textPrimary_2">#E0c8d8</color>
+    <color name="textSecondary">#082040</color>
+    <color name="buttonDisabled">#B0B8C8</color>
+    <color name="cardBackgroundGrey">#404860</color>
+
 
     <!-- 1st Gradient color -->
     <color name="colorPurple_A400">#D500F9</color>

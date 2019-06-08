@@ -2,12 +2,9 @@ package com.sidekick.apps.habiter.models;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
-
-import com.sidekick.apps.habiter.Util;
 
 import java.util.Date;
 
@@ -20,7 +17,7 @@ public class User {
     @PrimaryKey @NonNull
     private String userName;
     private String favHabit;
-    private int habitLimit;
+    private int tokens;
     private int revives;
     private int revivesRemaining;
     private int lvl;
@@ -40,7 +37,7 @@ public class User {
         this.favHabit = "Not Available";
         this.streak = 0;
         this.revives = 2;
-        this.habitLimit = 5;
+        this.tokens = 5;
         this.totalTimesDone = 0;
         this.habitCount = 0;
         this.refreshedDate = new Date().getDate();
@@ -102,8 +99,8 @@ public class User {
         this.points = points;
     }
 
-    public int getHabitLimit() { return habitLimit; }
-    public void setHabitLimit(int habitLimit) { this.habitLimit = habitLimit; }
+    public int getTokens() { return tokens; }
+    public void setTokens(int tokens) { this.tokens = tokens; }
 
     public String getFavHabit() { return favHabit; }
     public void setFavHabit(String favHabit) { this.favHabit = favHabit; }

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import com.sidekick.apps.habiter.models.HabitsDatabase
 import com.sidekick.apps.habiter.models.User
@@ -34,7 +33,7 @@ class ProfileFragment:Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_profile, container, false)
         initializeWidgets(view)
-
+        bindData()
         return view
     }
 
@@ -48,7 +47,7 @@ class ProfileFragment:Fragment() {
         habitLimit = view.findViewById(R.id.profile_habit_limit)
         revivesDone = view.findViewById(R.id.profile_revives_done)
         revivesRemaining = view.findViewById(R.id.profile_revives_remaining)
-        bindData()
+
     }
     private fun bindData() {
         try {
@@ -62,7 +61,7 @@ class ProfileFragment:Fragment() {
 //                levelProgressBar.progress = level
 //                pointsProgressBar.progress = points
                 habitCount.text = user.habitCount.toString()
-                habitLimit.text = user.habitLimit.toString()
+                habitLimit.text = user.tokens.toString()
                 revivesRemaining.text = user.revives.toString()
 
             }

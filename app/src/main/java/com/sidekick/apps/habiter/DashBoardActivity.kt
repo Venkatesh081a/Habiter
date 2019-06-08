@@ -9,7 +9,9 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.RelativeLayout
 import com.sidekick.apps.habiter.models.HabitsDatabase
@@ -38,9 +40,9 @@ import kotlin.concurrent.thread
             updateRecords.execute(DashBoardActivity.DASHBOARD_TAG)
         }
 
-
+            thread {
             HabitsDatabase.getDatabase(applicationContext).userDao().updateRefreshedDate(Date().time)
-
+            }.run()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,8 @@ import kotlin.concurrent.thread
         fm = supportFragmentManager
         setUpToolbar()
         initializeWidgets()
-       // addHabitsListViewFragment()
+        //Snackbar.make(relativeLayout,"fab button clicked",Snackbar.LENGTH_LONG).show()
+       //addHabitsListViewFragment()
         }
 
     private fun initializeWidgets() {
@@ -77,13 +80,21 @@ import kotlin.concurrent.thread
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val intent = Intent(this,RewardsActivity::class.java)
+        startActivity(intent)
+        return true
+
+    }
+
 
 
 
     private fun setUpToolbar() {
         toolbar = findViewById(R.id.dashboard_toolbar)
+        val textColor = resources.getColor(R.color.textPrimary)
+        toolbar.setTitleTextColor(textColor)
         setSupportActionBar(toolbar)
-        window.statusBarColor = resources.getColor(R.color.colorPrimary)
     }
 
 
@@ -92,7 +103,7 @@ import kotlin.concurrent.thread
 
     override fun onResume() {
         super.onResume()
-       fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
+        fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
 
 
     }

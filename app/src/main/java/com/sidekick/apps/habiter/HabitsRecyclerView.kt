@@ -33,7 +33,7 @@ import kotlin.concurrent.thread
        // val health:TextView = itemView.findViewById(R.id.list_item_health)
         val doneButton:Button = itemView.findViewById(R.id.list_item_button_done)
         val healthWaveLoadingView:WaveLoadingView = itemView.findViewById(R.id.list_item_health)
-        val progressWaveLoadingView:WaveLoadingView = itemView.findViewById(R.id.list_item_progress)
+        //val progressWaveLoadingView:WaveLoadingView = itemView.findViewById(R.id.list_item_progress)
 
 
     }
@@ -41,9 +41,7 @@ import kotlin.concurrent.thread
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int):ViewHolder {
         val v = LayoutInflater.from(parent?.context).inflate(R.layout.habit_list_view,parent,false)
-        v.setOnClickListener {
-            Toast.makeText(context,"item clicked",Toast.LENGTH_SHORT).show()
-        }
+
         return ViewHolder(v)
     }
 
@@ -59,14 +57,14 @@ import kotlin.concurrent.thread
             clickListener.onClick(holder.itemView,habit.id)
         }
         holder.dayCount?.text = habit.daysToComplete.toString()
-        holder.healthWaveLoadingView.progressValue = habit.health*3
-        holder.healthWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.bright_foreground_material_light)
+        holder.healthWaveLoadingView.progressValue = habit.health*10
+       // holder.healthWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.bright_foreground_material_light)
 
-        holder.progressWaveLoadingView.progressValue = 58
-        holder.progressWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.colorGreen_A400)
+        //holder.progressWaveLoadingView.progressValue = 58
+        //holder.progressWaveLoadingView.waveColor = context.applicationContext.resources.getColor(R.color.colorGreen_A400)
 
 
-       // holder.health.text = habit.health.toString()
+
         setUpDoneButton(holder,habit)
 
 
@@ -91,6 +89,17 @@ import kotlin.concurrent.thread
         Toast.makeText(context.applicationContext,habit.lastDoneDate.toString(),Toast.LENGTH_SHORT).show()
 
         habit.habitDone()
+        if(habit.daysToComplete == 0)
+        {
+         val currentRewardId = habit.currentRewardId
+          thread {
+              val reward = HabitsDatabase.getDatabase(context.applicationContext).rewardsDao().getReward(currentRewardId)
+                  reward.isAvailable = true
+              HabitsDatabase.getDatabase(context.applicationContext).rewardsDao().updateReward(reward)
+              //createSnacKbarHERE
+          }
+
+        }
         thread {val habitDatabase:HabitsDatabase = HabitsDatabase.getDatabase(context.applicationContext)
             val user:User = habitDatabase.userDao().user[0]
             user.habitDone(100)
@@ -101,13 +110,10 @@ import kotlin.concurrent.thread
     }
     private fun nextLevelOnClickListener(habit: Habit) = View.OnClickListener {
         Log.d("nextLevelOnClickLister","is clicked")
-        habit.levelUp()
+
+
         val habitRenewFragment = HabitRenewFragment.getInstance(habit).show(fm,"tag")
-       /*thread {
-            val habitsDatabase = HabitsDatabase.getDatabase(context.applicationContext)
-            habit.levelUp()
-            habitsDatabase.habitsDao().updateHabit(habit)
-        }*/
+
 
         notifyDataSetChanged()
     }

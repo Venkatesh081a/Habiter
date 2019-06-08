@@ -25,8 +25,7 @@ public class Habit {
     private int health;
     private int daysToComplete;
     private int totalTimesDone;
-
-
+    private int currentRewardId;
 
     private int timesDone;
     private Long startDate;
@@ -138,6 +137,23 @@ public class Habit {
     public void setTotalTimesDone(int totalTimesDone) {
         this.totalTimesDone = totalTimesDone;
     }
+
+    public int getCurrentRewardId() {
+        return currentRewardId;
+    }
+
+    public void setCurrentRewardId(int currentRewardId) {
+        this.currentRewardId = currentRewardId;
+    }
+
+    public int[] getDayGoals() {
+        return dayGoals;
+    }
+
+    public void setDayGoals(int[] dayGoals) {
+        this.dayGoals = dayGoals;
+    }
+
     @Ignore
     public int habitDone()
     {
