@@ -123,7 +123,7 @@ import kotlin.concurrent.thread
 
     override fun refreshData() {
 
-        fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
+       // fm.beginTransaction().replace(R.id.list_view_fragment,HabitListViewFragment.getInstance()).commit()
     }
 
     companion object {

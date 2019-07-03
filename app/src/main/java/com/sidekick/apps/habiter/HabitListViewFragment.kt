@@ -54,10 +54,10 @@ class HabitListViewFragment:Fragment() {
     }
 
 
+
     companion object {
         val HABIT_ID = "habitId"
-        public fun getInstance():HabitListViewFragment
-        {
+        public fun getInstance():HabitListViewFragment {
             return HabitListViewFragment()
         }
     }
