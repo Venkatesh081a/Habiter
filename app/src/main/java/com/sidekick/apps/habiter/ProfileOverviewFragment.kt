@@ -20,6 +20,7 @@ class ProfileOverviewFragment:Fragment()
 {
     private lateinit var profileImage:CircleImageView
     private lateinit var lvlTextView:TextView
+    private lateinit var rewardsButton:TextView
     private lateinit var pointsTextView:TextView
     private lateinit var streakTextView:TextView
     private lateinit var database:HabitsDatabase
@@ -33,12 +34,14 @@ class ProfileOverviewFragment:Fragment()
 
     private fun initializeWidgets(view: View) {
         try {
-         Thread().run {val user:User = database.habitsDao().user[0]
+         Thread().run {val user:User = database.userDao().user[0]
 
         profileImage = view.findViewById(R.id.profile_image_view)
         profileImage.setOnClickListener(profileImageOnClick())
         lvlTextView = view.findViewById(R.id.profile_lvl_text_view)
         lvlTextView.text = user.lvl.toString()
+        rewardsButton = view.findViewById(R.id.profile_overview_rewards_button)
+         rewardsButton.setOnClickListener(rewardsButtonOnClickListener())
         pointsTextView = view.findViewById(R.id.profile_points_text_view)
         pointsTextView.text = user.points.toString()
         streakTextView = view.findViewById(R.id.profile_streak_text_view)
@@ -47,6 +50,14 @@ class ProfileOverviewFragment:Fragment()
         {
 
         }
+    }
+
+    private fun rewardsButtonOnClickListener(): View.OnClickListener? {
+        return View.OnClickListener {
+            val intent = Intent(activity,RewardsActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 

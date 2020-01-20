@@ -1,49 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    android:orientation="vertical"
-    tools:layout_editor_absoluteY="25dp">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_dp"
-        android:layout_width="201dp"
-        android:layout_height="252dp"
-        android:layout_marginLeft="75dp"
-        android:src="@drawable/backg" />
-
-    <TextView
-        android:id="@+id/profile_name"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="my Name"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:layout_height="match_parent"
 
-    <ProgressBar
-        android:id="@+id/profile_progress_level"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="45dp" />
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="25dp">
 
-    <ProgressBar
-        android:id="@+id/profile_progress_points"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Streak"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/streak_text_view_profile_fragment"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_dp"
+            android:layout_width="244dp"
+            android:layout_height="213dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/backg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="my Name"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_dp" />
 
+        <TextView
+            android:layout_width="38dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="8dp"
+            android:text="Habits"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.012"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Count"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+        <TextView
+            android:id="@+id/profile_habit_count"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="15dp"
+            android:text="value"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Tokens"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/profile_habit_limit"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:text="value"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+            app:layout_constraintStart_toEndOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Streak"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/profile_streak"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:text="value"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView22"
+            app:layout_constraintStart_toEndOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="points"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/profile_points"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:text="value"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView25"
+            app:layout_constraintStart_toEndOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Revives"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="done"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+        <TextView
+            android:id="@+id/profile_revives_done"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:text="value"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView28"
+            app:layout_constraintStart_toEndOf="@+id/textView28" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Remaining"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+        <TextView
+            android:id="@+id/profile_revives_remaining"
+            android:layout_width="@dimen/profile_fragment_text_view_width"
+            android:layout_height="@dimen/profile_fragment_text_view_height"
+            android:layout_marginStart="24dp"
+            android:text="value"
+            android:textSize="@dimen/profile_fragment_text_size"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+            app:layout_constraintStart_toEndOf="@+id/textView30" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="368dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/textView14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="368dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_points" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

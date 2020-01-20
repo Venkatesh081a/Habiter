@@ -1,30 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".DashBoardActivity">
-   <TextView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="Habit you want to develop"
-       android:id="@+id/textView" />
+    tools:context=".DashBoardActivity"
+    android:background="@drawable/gradient_3">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="45dp"
+        android:text="Habit you want to develop"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.232" />
 
     <EditText
 
         android:id="@+id/fragment_addhabits_habit_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_height="0dp"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="16dp" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="44dp"
+        android:hint="Enter Habit Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/add_fragment_frequency"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+
         android:id="@+id/fragment_addhabits_habit_add_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/fragment_addhabits_habit_name"
-        android:layout_marginTop="25dp"
-        android:text="Start building" />
-</RelativeLayout>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:text="Start building"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/gradient_7"/>
+
+    <SeekBar
+        android:id="@+id/add_fragment_frequency"
+        style="@android:style/Widget.Material.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="360dp"
+        android:max="10"
+        android:progress="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name" />
+
+    <TextView
+        android:id="@+id/remaining_habits"
+        android:layout_width="@dimen/simple_text_view_width"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="160dp"
+        android:text="Remaining"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/remaing_habits_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/remaing_habits_text_view"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_fragment_frequency" />
+
+    <TextView
+        android:id="@+id/remaing_habits_text_view"
+        android:layout_width="@dimen/simple_text_view_width"
+        android:layout_height="26dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="32dp"
+        android:text="5"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Frequency"
+        app:layout_constraintBottom_toTopOf="@+id/add_fragment_frequency"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="320dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Note:- Once created, you cannot delete"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_addhabits_habit_add_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/frequency_text_view"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Repeat in 1 day"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/add_fragment_frequency"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_addhabits_habit_name" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="@dimen/profile_fragment_text_view_width"
+        android:layout_height="@dimen/profile_fragment_text_view_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Reward"
+        android:textSize="@dimen/profile_fragment_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_fragment_frequency" />
+
+    <EditText
+        android:id="@+id/reward"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+</android.support.constraint.ConstraintLayout>

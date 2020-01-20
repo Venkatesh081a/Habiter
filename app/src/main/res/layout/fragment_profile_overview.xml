@@ -1,43 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="75dp">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:paddingBottom="25dp"
+    android:paddingTop="25dp"
+    android:background="@color/mainBackground">
+
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image_view"
         android:layout_width="75dp"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
         android:src="@drawable/backg"
-        android:id="@+id/profile_image_view"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="35dp"
-        >
 
-        <TextView
-            android:id="@+id/profile_lvl_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="lvl" />
-
-        <TextView
-            android:id="@+id/profile_points_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="points"/>
-
-    </LinearLayout>
     <TextView
-        android:layout_marginLeft="35dp"
-       android:layout_marginTop="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:id="@+id/profile_lvl_text_view"
+        android:layout_width="52dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_weight="1"
+        android:text="lvl"
+        app:layout_constraintBaseline_toBaselineOf="@+id/profile_streak_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <TextView
+        android:id="@+id/profile_points_text_view"
+        android:layout_width="56dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="points"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+    <TextView
         android:id="@+id/profile_streak_text_view"
-        android:text="streak"/>
+        android:layout_width="60dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="38dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="2dp"
+        android:text="streak"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.638" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="2dp"
+        android:text="Level"
+        android:textAlignment="center"
+        app:layout_constraintBaseline_toBaselineOf="@id/profile_lvl_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/profile_lvl_text_view"
+        app:layout_constraintStart_toEndOf="@+id/profile_image_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="points"
+        app:layout_constraintBaseline_toBaselineOf="@+id/profile_points_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/profile_points_text_view"
+        app:layout_constraintStart_toEndOf="@+id/profile_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="59dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="38dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="2dp"
+        android:text="streak"
+        app:layout_constraintBaseline_toBaselineOf="@+id/profile_streak_text_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/profile_streak_text_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/profile_overview_rewards_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="104dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:text="Rewards"
+        app:layout_constraintStart_toEndOf="@+id/profile_points_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
